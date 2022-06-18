@@ -76,9 +76,10 @@ class AsteriskController {
         });
     };
 
-    GetSipExtensionString(extension, secret, context, type = "friend", callerId = extension, qualify = "yes", host = "dynamic", canReinvite = "no") {
+    GetSipExtensionString(extension, username, secret, context, type = "friend", callerId = extension, qualify = "yes", host = "dynamic", canReinvite = "no", extraConfigs = []) {
         let newSip = new AsteriskText(extension);
         newSip.AppendKeyValue("type", type);
+        newSip.AppendKeyValue("username", username);
         newSip.AppendKeyValue("secret", secret);
         newSip.AppendKeyValue("callerid", callerId);
         newSip.AppendKeyValue("qualify", qualify);
@@ -86,6 +87,9 @@ class AsteriskController {
         newSip.AppendKeyValue("canreinvite", canReinvite);
         newSip.AppendKeyValue("dial", "SIP/" + extension);
         newSip.AppendKeyValue("context", context);
+        extraConfigs.forEach(config => {
+            newSip.AppendKeyValue(config.key, config.value);
+        });
         return newSip.GetText();
     }
 }
