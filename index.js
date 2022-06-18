@@ -58,9 +58,12 @@ class AsteriskController {
         });
     };
 
-    GetContextString(context) {
+    GetContextString(context, extraRules = []) {
         let newContext = new AsteriskText(context);
         newContext.AppendExtenRule("_X.,1,Dial(SIP/${EXTEN})");
+        extraRules.forEach(rule => {
+            newContext.AppendExtenRule(rule);
+        });
         return newContext.GetText();
     }
 
