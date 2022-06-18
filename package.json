@@ -1,0 +1,14 @@
+{
+  "name": "grahamjs",
+  "version": "1.0.0",
+  "description": "asterisk extension api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "asterisk"
+  ],
+  "author": "carlos velasquez rubio",
+  "license": "ISC"
+}
