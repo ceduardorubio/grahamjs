@@ -1,6 +1,16 @@
-function SipAnalyzer(fileContent, cb) {
+function removeComments(fileContent) {
+    const lines = fileContent.split('\n');
+    let noComments = "";
+    lines.forEach((line) => {
+        if (line.indexOf(';') != 0) noComments += line + "\n";
+    });
+    return noComments;
+}
+
+function SipAnalyzer(fileRawContent, cb) {
+    let noComments = removeComments(fileRawContent);
     var result = {}
-    var extensionsTextArray = fileContent.split(';');
+    var extensionsTextArray = noComments.split(';');
     var generalSection = extensionsTextArray.splice(0, 1)[0];
     ExtensionToJSON(generalSection, (err, general) => {
         if (err) {
